@@ -41,7 +41,7 @@ class Market
       end
     end
     unique_items_in_stock = items_in_stock.uniq
-    
+
     # vendors.each do |vendor|
     #   vendor.inventory.each do |item_in_stock|
     #     if total_inventory.include?(item_in_stock) == true
@@ -53,12 +53,19 @@ class Market
     #     end
     #   end
     # end
-    binding.pry
 
     total_inventory
   end
 
-
+  def sorted_item_list
+    item_list = []
+    vendors.each do |vendor|
+      vendor.inventory.each do |item_in_stock|
+        item_list << item_in_stock[0].name
+      end
+    end
+    item_list.uniq.sort
+  end
 
 
 
