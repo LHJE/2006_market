@@ -6,7 +6,7 @@ class Market
   def initialize(name)
     @name = name
     @vendors = []
-    @total_inventory = {}
+
   end
 
   def add_vendor(vendor)
@@ -33,33 +33,62 @@ class Market
     names
   end
 
-  # def total_inventory
-  #   items_in_stock = []
-  #   vendors.each do |vendor|
-  #     vendor.inventory.each do |item_in_stock|
-  #       items_in_stock << item_in_stock[0]
-  #     end
-  #   end
-  #   unique_items_in_stock = items_in_stock.uniq
-  #
-  #   # vendors.each do |vendor|
-  #   #   vendor.inventory.each do |item_in_stock|
-  #   #     if total_inventory.include?(item_in_stock) == true
-  #   #       total_inventory.each do |item_in_here, how_many|
-  #   #         @total_inventory[item_in_here] = [vendor, how_many]
-  #   #       end
-  #   #     elsif unique_items_in_stock.any?(item_in_stock[0])
-  #   #       total_inventory[item_in_stock[0]] = vendor
-  #   #     end
-  #   #   end
-  #   # end
-  #
-  #   total_inventory
-  # end
+  def total_inventory
+    total_inventory = {}
+    items_in_stock = []
+    vendors_together = []
+    vendors.each do |vendor|
+      vendor.inventory.each do |item_in_stock|
+        items_in_stock << item_in_stock[0]
+      end
+    end
+    unique_items_in_stock = items_in_stock.uniq
+    vendors.each do |vendor|
+      vendor.inventory.each do |item_in_stock|
+        if total_inventory.include?(item_in_stock[0]) == true
+          total_inventory.each do |item_in_here, new_vendor|
+            vendors_together << vendor
+            vendors_together << new_vendor
+            unique_vendors_together = vendors_together.uniq
+            total_inventory[item_in_here] = unique_vendors_together
+            # binding.pry
+          end
+        elsif unique_items_in_stock.any?(item_in_stock[0])
+          total_inventory[item_in_stock[0]] = vendor
+        end
+      end
+    end
+
+    total_inventory
+  end
 
 
-#An item is overstocked if it is sold by more than 1 vendor AND the total quantity is greater than 50.
   def overstocked_items
+    ## theoretically this could just pull from total_inventory, if that one was up and running.
+
+    # total_inventory = {}
+    # items_in_stock = []
+    # vendors_together = []
+    # vendors.each do |vendor|
+    #   vendor.inventory.each do |item_in_stock|
+    #     items_in_stock << item_in_stock[0]
+    #   end
+    # end
+    # unique_items_in_stock = items_in_stock.uniq
+    # vendors.each do |vendor|
+    #   vendor.inventory.each do |item_in_stock|
+    #     if total_inventory.include?(item_in_stock[0]) == true
+    #       total_inventory.each do |item_in_here, new_vendor|
+    #         vendors_together << vendor
+    #         vendors_together << new_vendor
+    #         unique_vendors_together = vendors_together.uniq
+    #         total_inventory[item_in_here] = unique_vendors_together
+    #       end
+    #     elsif unique_items_in_stock.any?(item_in_stock[0])
+    #       total_inventory[item_in_stock[0]] = vendor
+    #     end
+    #   end
+    # end
     overstocked_items = []
     total_inventory.each do |item_in_stock, item_info|
       if item_info[quantity] > 50 && item_info[vendors].count > 1

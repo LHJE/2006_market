@@ -85,7 +85,6 @@ class MarketTest < Minitest::Test
   end
 
   def test_total_inventory
-    skip
     market = Market.new("South Pearl Street Farmers Market")
     vendor1 = Vendor.new("Rocky Mountain Fresh")
     item1 = Item.new({name: 'Peach', price: "$0.75"})
