@@ -32,5 +32,23 @@ class Vendor
     number_of_items[0]
   end
 
+  def potential_revenue
+    money = 0
+    inventory.each do |item_in_stock|
+      price = item_in_stock[0].price[1..-1]
+      money += (price.to_f * item_in_stock[1].to_f).round(2)
+    end
+    # binding.pry
+
+    money
+  end
+
+
+
+
+
+
+
+
 
 end
