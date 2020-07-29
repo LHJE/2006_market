@@ -8,7 +8,6 @@ class Vendor
   end
 
   def stock(item, amount)
-
     if inventory.include?(item) == true
       @inventory.each do |item_in_stock, how_many|
         @inventory[item] = amount + how_many
