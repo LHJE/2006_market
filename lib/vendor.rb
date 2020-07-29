@@ -1,3 +1,4 @@
+require 'pry'
 class Vendor
 
   attr_reader :name, :inventory
@@ -6,6 +7,14 @@ class Vendor
     @inventory = {}
   end
 
+  def stock(item, amount)
+    @inventory[item] = amount
+
+  end
+
+  # def check_stock(item)
+  #   binding.pry
+  # end
 
 
 end
