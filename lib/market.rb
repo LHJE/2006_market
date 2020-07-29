@@ -32,7 +32,31 @@ class Market
     names
   end
 
+  def total_inventory
+    total_inventory = {}
+    items_in_stock = []
+    vendors.each do |vendor|
+      vendor.inventory.each do |item_in_stock|
+        items_in_stock << item_in_stock[0]
+      end
+    end
+    unique_items_in_stock = items_in_stock.uniq
+    
+    # vendors.each do |vendor|
+    #   vendor.inventory.each do |item_in_stock|
+    #     if total_inventory.include?(item_in_stock) == true
+    #       total_inventory.each do |item_in_here, how_many|
+    #         @total_inventory[item_in_here] = [vendor, how_many]
+    #       end
+    #     elsif unique_items_in_stock.any?(item_in_stock[0])
+    #       total_inventory[item_in_stock[0]] = vendor
+    #     end
+    #   end
+    # end
+    binding.pry
 
+    total_inventory
+  end
 
 
 

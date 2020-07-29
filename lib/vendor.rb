@@ -9,11 +9,11 @@ class Vendor
 
   def stock(item, amount)
     if inventory.include?(item) == true
-      @inventory.each do |item_in_stock, how_many|
-        @inventory[item] = amount + how_many
+      inventory.each do |item_in_stock, how_many|
+        inventory[item] = amount + how_many
       end
     else
-      @inventory[item] = amount
+      inventory[item] = amount
     end
   end
 
@@ -38,8 +38,6 @@ class Vendor
       price = item_in_stock[0].price[1..-1]
       money += (price.to_f * item_in_stock[1].to_f).round(2)
     end
-    # binding.pry
-
     money
   end
 
